@@ -1107,7 +1107,7 @@ function renderDropdown(results, token) {
   btns.appendChild(btnAsc); btns.appendChild(btnDesc); lbl.appendChild(btns);
   dd.appendChild(lbl);
 
-  sortDropdownResults(results).forEach(function(r){
+  sortDropdownResults(deduped).forEach(function(r){
     var item=document.createElement('div'); item.className='dropdown-item';
 
     var th=document.createElement('img'); th.className='dropdown-thumb';
