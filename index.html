@@ -1070,10 +1070,18 @@ function sortDropdownResults(results) {
   });
 }
 
+function normalizeTitle(t) {
+  t = (t||'').toLowerCase();
+  var dash = t.indexOf(' - ');
+  if(dash !== -1) t = t.slice(dash + 3);
+  t = t.replace(/\s*\(.*?\)/g, '').trim();
+  return t;
+}
+
 function deduplicateResults(results) {
   var seen = {};
   return results.filter(function(r){
-    var key = r.master_id ? 'm'+r.master_id : 't'+(r.title||'');
+    var key = (r.master_id && r.master_id > 0) ? 'm'+r.master_id : 't'+normalizeTitle(r.title);
     if(seen[key]) return false;
     seen[key] = true;
     return true;
