@@ -1243,12 +1243,20 @@ async function discogsGet(path,token) {
   if(!res.ok) throw new Error('Discogs '+res.status); return res.json();
 }
 function searchByBarcode(b,t){ return discogsGet('/database/search?barcode='+encodeURIComponent(b)+'&type=release',t); }
-function searchByQuery(q,t)  { return discogsGet('/database/search?q='+encodeURIComponent(q)+'&type=release&format=Vinyl&per_page=100',t); }
+function searchByQuery(q,t)  { return discogsGet('/database/search?q='+encodeURIComponent(q)+'&type=master&per_page=100',t); }
+function getMasterVersions(id,t){ return discogsGet('/masters/'+id+'/versions?per_page=1&sort=released&sort_order=asc',t); }
 function getRelease(id,t)    { return discogsGet('/releases/'+id,t); }
 function getMarketStats(id,t){ return discogsGet('/marketplace/stats/'+id+'?curr_abbr=USD',t); }
 
 async function populateFromDiscogs(r,token) {
   var id=r.id;
+  // Master results need a real release ID to fetch full details + market stats
+  if(r.type==='master' || r.master_id==null) {
+    try {
+      var versions=await getMasterVersions(id,token);
+      if(versions.versions&&versions.versions.length) id=versions.versions[0].id;
+    } catch(_){}
+  }
   var data={
     discogsId:String(id), coverImage:r.cover_image||r.thumb||'',
     artist:(r.title||'').split(' - ')[0]||'',
