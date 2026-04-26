@@ -547,7 +547,7 @@ textarea { resize:vertical; min-height:72px; }
   </div>
   <span class="count-badge" id="count-badge">0 records</span>
   <div class="header-right">
-    <span class="version-tag">v3.16</span>
+    <span class="version-tag">v3.17</span>
     <span class="header-sep">|</span>
     <button class="btn btn-ghost" id="btn-analytics" title="Analytics">
       <svg class="icon-chart" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -712,18 +712,34 @@ textarea { resize:vertical; min-height:72px; }
       </div>
 
       <div class="modal-section">
-        <div class="modal-section-title">Import your collection</div>
+        <div class="modal-section-title">Import or update your collection</div>
         <p class="download-notice">
-          Restore your collection from a JSON file you exported earlier. Use this to move your records between browsers or devices — for example, from a direct file to localhost. <strong>This replaces everything currently in your vault</strong>, so export first if you have anything you want to keep.
+          Move your collection between browsers, devices, or environments — as long as they all run VinylVault.<br><br>
+          <strong>Import JSON</strong> — replaces everything currently in your vault with the file. Use this to start fresh from a backup.<br>
+          <strong>Merge JSON</strong> — adds records from the file that aren't already in your vault, without touching what you already have. Use this to combine collections from multiple sources.
         </p>
         <input type="file" id="import-file-input" accept=".json" style="display:none">
-        <button class="btn" id="btn-import-json">
-          <svg class="icon-upload" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="overflow:visible">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-            <g class="arrow-up-group"><path d="M12 3v12"/><path d="m17 8-5-5-5 5"/></g>
-          </svg>
-          Import JSON
-        </button>
+        <input type="file" id="merge-file-input" accept=".json" style="display:none">
+        <div class="download-btns">
+          <button class="btn" id="btn-import-json">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="overflow:visible">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <g class="arrow-up-group"><path d="M12 3v12"/><path d="m17 8-5-5-5 5"/></g>
+            </svg>
+            Import JSON
+          </button>
+          <button class="btn" id="btn-merge-json">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <circle cx="7" cy="18" r="2"/>
+              <circle cx="7" cy="6" r="2"/>
+              <circle cx="17" cy="12" r="2"/>
+              <path d="M7 8v6"/>
+              <path d="M9 6h3a4 4 0 0 1 4 4v2"/>
+            </svg>
+            Merge JSON
+          </button>
+        </div>
       </div>
     </div>
     <div class="modal-footer">
@@ -1671,6 +1687,38 @@ document.getElementById('import-file-input').addEventListener('change', function
       toast('Imported '+data.length+' record'+(data.length===1?'':'s')+'.', 'success');
     } catch(err) {
       toast('Import failed: '+err.message, 'error');
+    }
+    e.target.value = '';
+  };
+  reader.readAsText(file);
+});
+
+document.getElementById('btn-merge-json').addEventListener('click', function(){
+  document.getElementById('merge-file-input').click();
+});
+document.getElementById('merge-file-input').addEventListener('change', function(e){
+  var file = e.target.files[0]; if(!file) return;
+  var reader = new FileReader();
+  reader.onload = function(ev){
+    try {
+      var incoming = JSON.parse(ev.target.result);
+      if(!Array.isArray(incoming)) throw new Error('Not a valid VinylVault file.');
+      var existingIds = new Set(collection.map(function(r){ return r.discogsId || (r.artist+'|'+r.title); }));
+      var added = 0;
+      incoming.forEach(function(r){
+        var key = r.discogsId || (r.artist+'|'+r.title);
+        if(!existingIds.has(key)){
+          collection.push(r);
+          existingIds.add(key);
+          added++;
+        }
+      });
+      saveCollection(collection);
+      renderCollection();
+      closeModal('modal-config');
+      toast('Merged: '+added+' new record'+(added===1?'':'s')+' added.', 'success');
+    } catch(err) {
+      toast('Merge failed: '+err.message, 'error');
     }
     e.target.value = '';
   };
