@@ -1,5 +1,9 @@
 # VinylVault
 
+<p align="center">
+  <img src="hero.png" alt="VinylVault" width="100%"/>
+</p>
+
 I have been collecting vinyl records for many years. Like most collectors, my system for tracking everything was somewhere between a memory and a messy CSV file. I knew what I had — mostly — but not always what I paid, whether something was a special edition, or if it was signed. My original Pink Floyd *The Wall*, signed by Roger Waters himself, deserved better than a spreadsheet row.
 
 So I built VinylVault.
@@ -23,6 +27,12 @@ VinylVault is a single-page app that connects to the Discogs database and gives 
 - **Dark UI** — designed to look like something worth opening every day
 
 ---
+
+## How it works
+
+<p align="center">
+  <img src="flow.svg" alt="VinylVault user flow" width="100%"/>
+</p>
 
 ## Getting started
 
