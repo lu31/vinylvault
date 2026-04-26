@@ -28,6 +28,23 @@ VinylVault is a single-page app that connects to the Discogs database and gives 
 
 ---
 
+## Screenshots
+
+| Collection | Search |
+|:---:|:---:|
+| ![Collection](screenshot-collection.png) | ![Search](screenshot-search.png) |
+
+| Analytics | Settings |
+|:---:|:---:|
+| ![Analytics](screenshot-analytics.png) | ![Settings](screenshot-settings.png) |
+
+<p align="center">
+  <img src="screenshot-scan.png" alt="Barcode Scanner" width="50%"/>
+  <br><em>Barcode scanner — point your camera at the sleeve</em>
+</p>
+
+---
+
 ## How it works
 
 <p align="center">
