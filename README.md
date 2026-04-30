@@ -4,9 +4,13 @@
   <img src="hero.png" alt="VinylVault" width="100%"/>
 </p>
 
-I have been collecting vinyl records for many years. Like most collectors, my system for tracking everything was somewhere between a memory and a messy CSV file. I knew what I had — mostly — but not always what I paid, whether something was a special edition, or if it was signed. My original Pink Floyd *The Wall*, signed by Roger Waters himself, deserved better than a spreadsheet row.
+I have been collecting vinyl records for many years. Like most collectors, my system for tracking everything was somewhere between a memory and a messy CSV file. I knew what I had, mostly, but not always what I paid, whether something was a special edition, or if it was signed. My original Pink Floyd *The Wall*, signed by Roger Waters himself, deserved better than a spreadsheet row.
 
-So I built VinylVault.
+So I built VinylVault. Not the traditional way, no sitting down with a code editor typing it line by line. What I did was have a conversation, a long and iterative one, with Claude Code, Anthropic's AI system, and built this through that process across seventeen versions.
+
+What I brought to it was fifteen years of product design experience. I knew what the app needed to feel like, how the flow had to work, where friction would kill the experience, and when something just looked done versus when it was actually right. Those instincts don't come from a tutorial. They come from years of shipping real products, working with real users, and learning to tell the difference between a good decision and a comfortable one.
+
+The AI handled the implementation. I handled the product thinking. That combination, a designer who knows what to build and why, working with an AI that knows how to build it, is the real story behind VinylVault. The barrier to shipping something real is no longer writing code. It's knowing what to build.
 
 **Live app:** [lu31.github.io/vinylvault](https://lu31.github.io/vinylvault/)
 
@@ -66,6 +70,7 @@ That's it.
 
 - Vanilla HTML, CSS, JavaScript — no frameworks, no build step
 - [Discogs API](https://www.discogs.com/developers/)
+- Built conversationally with [Claude Code](https://claude.ai/code) by Anthropic
 - Deployed via GitHub Pages
 
 ---
