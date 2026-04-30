@@ -4,12 +4,11 @@
   <img src="hero.png" alt="VinylVault" width="100%"/>
 </p>
 
-
 ## The Story
 
 I have been collecting vinyl records for many years. Like most collectors, my system for tracking everything was somewhere between a memory and a messy CSV file. I knew what I had, mostly, but not always what I paid, whether something was a special edition, or if it was signed. My original Pink Floyd *The Wall*, signed by Roger Waters himself, deserved better than a spreadsheet row.
 
-So I built VinylVault. Not the traditional way, no sitting down with a code editor typing it line by line. What I did was have a conversation, a long and iterative one, with Claude Code, Anthropic's AI system, and built this through that process across seventeen versions.
+So I built VinylVault, not by sitting down with a code editor, but through a long and iterative conversation with Claude Code, Anthropic's AI system, across seventeen versions.
 
 What I brought to it was twenty-plus years of product design experience. I knew what the app needed to feel like, how the flow had to work, where friction would kill the experience, and when something just looked done versus when it was actually right. Those instincts don't come from a tutorial. They come from years of shipping real products, working with real users, and learning to tell the difference between a good decision and a comfortable one.
 
@@ -80,12 +79,10 @@ That's it.
 
 ## About
 
-My background is in product design and UX strategy, twenty-plus years of thinking about products and experiences, but not writing apps from scratch. VinylVault went through 17 versions. Not because it was broken, but because every iteration revealed something worth fixing. That process taught me more than I expected.
-
-If you collect vinyl, give it a try. It is completely free. If you like it — or don't — I would love to hear from you.
+If you collect vinyl, give it a try. It is completely free. If you build things with AI and want to compare notes, I'd like that too.
 
 **Long live the vinyl.**
 
 ---
 
-*An AI solution by [Lu31](https://lu31.com)*
+*Built by [lu31.com](https://lu31.com), product designer and vibe coder.*
