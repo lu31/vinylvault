@@ -4,6 +4,9 @@
   <img src="hero.png" alt="VinylVault" width="100%"/>
 </p>
 
+
+##The Story
+
 I have been collecting vinyl records for many years. Like most collectors, my system for tracking everything was somewhere between a memory and a messy CSV file. I knew what I had, mostly, but not always what I paid, whether something was a special edition, or if it was signed. My original Pink Floyd *The Wall*, signed by Roger Waters himself, deserved better than a spreadsheet row.
 
 So I built VinylVault. Not the traditional way, no sitting down with a code editor typing it line by line. What I did was have a conversation, a long and iterative one, with Claude Code, Anthropic's AI system, and built this through that process across seventeen versions.
