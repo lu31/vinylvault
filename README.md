@@ -90,6 +90,7 @@ That's it.
 
 - Vanilla HTML, CSS, JavaScript — no frameworks, no build step
 - [Discogs API](https://www.discogs.com/developers/)
+- iTunes Search API — 30-second track previews, no account required
 - Built conversationally with [Claude Code](https://claude.ai/code) by Anthropic
 - Deployed via GitHub Pages
 
