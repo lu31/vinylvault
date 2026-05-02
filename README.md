@@ -97,11 +97,11 @@ That's it.
 
 ## About
 
-If you collect vinyl, give it a try. It is completely free. If you build things with AI and want to compare notes, find me at lu31.com.
+If you collect vinyl, give it a try. It is completely free. If you build things with AI and want to compare notes, find me at [lu31.com](https://lu31.com).
 
 Long live the vinyl.
 
-— Lu Tapuch, product designer and vibe coder. [lu31.com](https://lu31.com)
+— Lu Tapuch, Product Designer | Vibe Coder -
 
 ---
 
