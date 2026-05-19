@@ -20,16 +20,6 @@ The AI handled the implementation. I handled the product thinking. That combinat
 
 ## Updates
 
-### v4.0 — May 2026
-
-The record detail view got a meaningful upgrade. What was a single panel showing cover art, value, and metadata is now a tabbed interface with two views.
-
-The first tab, Info, is exactly what it was before — nothing changed there.
-
-The second tab, Tracklist, is new. Opening it fetches the full track list from Discogs, then checks the iTunes catalogue in parallel to see which tracks have audio previews available. The ones that do get a small icon next to them. Tapping a track expands the row: the album cover appears as a spinning vinyl record, the preview plays automatically, and a close button collapses it again when you're done. The whole thing works without a login, an account, or an extra API key.
-
-The detail modal also got a layout fix along the way. The header and footer are now always visible regardless of how long the content is, with only the content area scrolling. A small change, but it was overdue.
-
 ### v5.0 — May 2026
 
 The background image you see when VinylVault loads has always been the same one I chose when I built the thing. That made sense when it was just mine. It makes less sense now that other people are using it.
@@ -41,6 +31,18 @@ Your vault should feel like yours.
 ### v4.1 — May 2026
 
 VinylVault is now licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/). Free to use, share, and build on for personal purposes. Not for commercial use. The license notice is visible in the app footer so there is no ambiguity about how it can be used.
+
+
+### v4.0 — May 2026
+
+The record detail view got a meaningful upgrade. What was a single panel showing cover art, value, and metadata is now a tabbed interface with two views.
+
+The first tab, Info, is exactly what it was before — nothing changed there.
+
+The second tab, Tracklist, is new. Opening it fetches the full track list from Discogs, then checks the iTunes catalogue in parallel to see which tracks have audio previews available. The ones that do get a small icon next to them. Tapping a track expands the row: the album cover appears as a spinning vinyl record, the preview plays automatically, and a close button collapses it again when you're done. The whole thing works without a login, an account, or an extra API key.
+
+The detail modal also got a layout fix along the way. The header and footer are now always visible regardless of how long the content is, with only the content area scrolling. A small change, but it was overdue.
+
 
 ---
 
