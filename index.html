@@ -452,6 +452,25 @@ textarea { resize:vertical; min-height:72px; }
 .download-notice { font-size:12px; color:var(--text-muted); margin-bottom:12px; line-height:1.6; }
 .download-btns   { display:flex; gap:8px; }
 
+/* ══ HERO IMAGE SETTINGS ══ */
+.hero-img-specs {
+  display:flex; flex-direction:column; gap:4px;
+  margin-top:10px; padding:10px 12px;
+  background:var(--surface-3); border-radius:var(--radius-sm);
+  font-size:12px; color:var(--text-muted); line-height:1.6;
+}
+.hero-img-preview-wrap {
+  width:100%; height:110px;
+  border-radius:var(--radius-sm); overflow:hidden;
+  border:1px solid var(--border); margin-bottom:12px;
+  display:flex; align-items:center; justify-content:center;
+  background:var(--surface-2);
+}
+#hero-img-preview { width:100%; height:100%; object-fit:cover; }
+.hero-img-ph { color:var(--text-dim); font-size:12px; }
+.hero-img-controls { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+.hero-img-controls .form-group { margin:0; flex:1; min-width:160px; }
+
 /* ══ ANALYTICS ══ */
 .analytics-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:24px; }
 .stat-card { background:var(--surface-2); border:1px solid var(--border); border-radius:var(--radius-sm); padding:14px 16px; text-align:center; }
@@ -611,7 +630,7 @@ textarea { resize:vertical; min-height:72px; }
   </div>
   <span class="count-badge" id="count-badge">0 records</span>
   <div class="header-right">
-    <span class="version-tag">v4.2</span>
+    <span class="version-tag">v5.0</span>
     <span class="header-sep">|</span>
     <button class="btn btn-ghost" id="btn-analytics" title="Analytics">
       <svg class="icon-chart" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -803,6 +822,30 @@ textarea { resize:vertical; min-height:72px; }
             </svg>
             Merge JSON
           </button>
+        </div>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-title">Hero Cover Image</div>
+        <div class="config-notice">
+          Personalise the full-screen background image shown when VinylVault loads. Upload a local file <strong>or</strong> paste an image URL — if a URL breaks, the default image is restored automatically.
+          <div class="hero-img-specs">
+            <span>&#10003; Formats: JPG &middot; PNG &middot; WebP &nbsp;&mdash;&nbsp; no GIF, no SVG</span>
+            <span>&#10003; Max file size: <strong>2 MB</strong> &nbsp;(warning shown above 1 MB)</span>
+            <span>&#10003; Recommended: <strong>1440 &times; 900 px</strong> or larger &nbsp;(min 1280 &times; 720 px)</span>
+          </div>
+        </div>
+        <div class="hero-img-preview-wrap">
+          <img id="hero-img-preview" src="" alt="" style="display:none">
+          <div id="hero-img-placeholder" class="hero-img-ph">Default image active</div>
+        </div>
+        <input type="file" id="hero-file-input" accept="image/jpeg,image/png,image/webp" style="display:none">
+        <div class="hero-img-controls">
+          <button class="btn" type="button" onclick="document.getElementById('hero-file-input').click()">Upload local image</button>
+          <div class="form-group">
+            <input type="url" id="hero-url-input" placeholder="Or paste an image URL&hellip;">
+          </div>
+          <button class="btn btn-ghost" type="button" onclick="resetHeroImage()">Reset to default</button>
         </div>
       </div>
     </div>
@@ -1346,11 +1389,91 @@ async function loadDiscogsIntoForm(resultItem, token) {
   }
 }
 
+// ─────────────────── HERO IMAGE ───────────────────
+var HERO_IMG_KEY = 'vinylvault_hero_image';
+function loadHeroImage()    { return localStorage.getItem(HERO_IMG_KEY)||''; }
+function saveHeroImage(src) { localStorage.setItem(HERO_IMG_KEY, src); }
+function clearHeroImage()   { localStorage.removeItem(HERO_IMG_KEY); }
+
+var DEFAULT_HERO = 'Gemini_Generated_Image_u4yxz9u4yxz9u4yx.png';
+var _pendingHeroSrc;
+
+function applyHeroImage() {
+  var saved = loadHeroImage();
+  var img   = document.querySelector('.hero-img');
+  if(saved){ img.src=saved; img.onerror=function(){ img.src=DEFAULT_HERO; img.onerror=null; }; }
+  else     { img.src=DEFAULT_HERO; img.onerror=null; }
+}
+
+function updateHeroPreview(src) {
+  var prev = document.getElementById('hero-img-preview');
+  var ph   = document.getElementById('hero-img-placeholder');
+  prev.src=src; prev.style.display='block'; ph.style.display='none';
+  prev.onerror = function(){
+    prev.style.display='none'; ph.style.display='';
+    ph.textContent='Image could not load — check the URL'; prev.onerror=null;
+  };
+}
+
+function resetHeroImage() {
+  _pendingHeroSrc='';
+  clearHeroImage();
+  document.getElementById('hero-file-input').value='';
+  document.getElementById('hero-url-input').value='';
+  var prev=document.getElementById('hero-img-preview'), ph=document.getElementById('hero-img-placeholder');
+  prev.src=''; prev.style.display='none'; ph.style.display=''; ph.textContent='Default image active';
+  applyHeroImage();
+  toast('Hero image reset to default','');
+}
+
+document.getElementById('hero-file-input').addEventListener('change', function(e){
+  var file=e.target.files[0]; if(!file) return;
+  if(!['image/jpeg','image/png','image/webp'].includes(file.type)){
+    toast('Only JPG, PNG, or WebP images are supported.','error'); e.target.value=''; return;
+  }
+  if(file.size > 2*1024*1024){ toast('Image too large — max 2 MB allowed.','error'); e.target.value=''; return; }
+  if(file.size > 1024*1024)   toast('Image is over 1 MB — it will work but may be slow to save.','');
+  var reader=new FileReader();
+  reader.onload=function(ev){
+    _pendingHeroSrc=ev.target.result;
+    updateHeroPreview(ev.target.result);
+    document.getElementById('hero-url-input').value='';
+  };
+  reader.readAsDataURL(file);
+});
+
+document.getElementById('hero-url-input').addEventListener('input', function(){
+  var url=this.value.trim();
+  if(url){ _pendingHeroSrc=url; updateHeroPreview(url); document.getElementById('hero-file-input').value=''; }
+});
+
 // ─────────────────── CONFIG ───────────────────
 document.getElementById('btn-config').addEventListener('click', function(){
-  document.getElementById('config-token').value=loadToken(); openModal('modal-config');
+  document.getElementById('config-token').value=loadToken();
+  _pendingHeroSrc=undefined;
+  document.getElementById('hero-url-input').value='';
+  document.getElementById('hero-file-input').value='';
+  var prev=document.getElementById('hero-img-preview'), ph=document.getElementById('hero-img-placeholder');
+  var saved=loadHeroImage();
+  if(saved){ prev.src=saved; prev.style.display='block'; ph.style.display='none'; }
+  else     { prev.src=''; prev.style.display='none'; ph.style.display=''; ph.textContent='Default image active'; }
+  openModal('modal-config');
 });
-function saveConfig() { saveToken(document.getElementById('config-token').value); closeModal('modal-config'); toast('Token saved','success'); }
+
+function saveConfig() {
+  saveToken(document.getElementById('config-token').value);
+  if(_pendingHeroSrc !== undefined){
+    if(_pendingHeroSrc){
+      try{ saveHeroImage(_pendingHeroSrc); }
+      catch(e){ toast('Image too large to save — try a smaller file.','error'); _pendingHeroSrc=undefined; return; }
+    }
+    _pendingHeroSrc=undefined;
+  }
+  applyHeroImage();
+  closeModal('modal-config');
+  toast('Settings saved','success');
+}
+
 function requireToken() {
   var t=loadToken(); if(!t){ toast('Add your Discogs token in Settings first.','error'); document.getElementById('config-token').value=''; openModal('modal-config'); return null; } return t;
 }
@@ -1358,7 +1481,7 @@ function requireToken() {
 // ─────────────────── DISCOGS API ──────────────
 var DISCOGS_BASE='https://api.discogs.com';
 async function discogsGet(path,token) {
-  var res=await fetch(DISCOGS_BASE+path,{headers:{'Authorization':'Discogs token='+token,'User-Agent':'VinylVault/4.2'}});
+  var res=await fetch(DISCOGS_BASE+path,{headers:{'Authorization':'Discogs token='+token,'User-Agent':'VinylVault/5.0'}});
   if(!res.ok) throw new Error('Discogs '+res.status); return res.json();
 }
 function searchByBarcode(b,t){ return discogsGet('/database/search?barcode='+encodeURIComponent(b)+'&type=release',t); }
@@ -2005,6 +2128,7 @@ document.getElementById('merge-file-input').addEventListener('change', function(
 })();
 
 // ─────────────────── INIT ─────────────────────
+applyHeroImage();
 renderCollection();
 if(!loadToken()) setTimeout(function(){openModal('modal-config');},600);
 </script>

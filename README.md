@@ -30,6 +30,14 @@ The second tab, Tracklist, is new. Opening it fetches the full track list from D
 
 The detail modal also got a layout fix along the way. The header and footer are now always visible regardless of how long the content is, with only the content area scrolling. A small change, but it was overdue.
 
+### v5.0 — May 2026
+
+The background image you see when VinylVault loads has always been the same one I chose when I built the thing. That made sense when it was just mine. It makes less sense now that other people are using it.
+
+So in this version you can change it. Open Settings, scroll to the bottom, and you'll find a new section for the hero cover image. You can upload something from your computer, or paste a URL from the web. Either way, you get a preview before anything is saved. If you paste a URL and it ever breaks, the app quietly falls back to the default so nothing looks broken. Accepted formats are JPG, PNG, and WebP — no animated GIFs, they're too heavy. The recommended size is 1440 × 900 px or larger, and there is a 2 MB cap to keep things from choking the browser.
+
+Your vault should feel like yours.
+
 ### v4.1 — May 2026
 
 VinylVault is now licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/). Free to use, share, and build on for personal purposes. Not for commercial use. The license notice is visible in the app footer so there is no ambiguity about how it can be used.
@@ -45,6 +53,7 @@ Here's what came out of that process. VinylVault is a single-page app that conne
 - **Discogs search** — search by artist or album, filter by format (Vinyl, CD, Cassette), sort by year
 - **Market value tracking** — pulls current Discogs marketplace data for each record
 - **Cover art** — auto-fetched from Discogs, or upload your own
+- **Custom hero image** — upload a photo from your computer or paste a URL to personalise the background; falls back to the default automatically if the link breaks
 - **Local storage** — your collection lives in your browser, no account needed
 - **Export & Import** — download your collection as JSON or CSV; import it back on any device
 - **Merge collections** — combine collections from multiple browsers or devices without losing existing records
