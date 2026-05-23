@@ -630,7 +630,7 @@ textarea { resize:vertical; min-height:72px; }
   </div>
   <span class="count-badge" id="count-badge">0 records</span>
   <div class="header-right">
-    <span class="version-tag">v6.3</span>
+    <span class="version-tag">v6.4</span>
     <span class="header-sep">|</span>
     <button class="btn btn-ghost" id="btn-analytics" title="Analytics">
       <svg class="icon-chart" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1102,7 +1102,13 @@ function toast(msg, type) {
 
 // ─────────────────── MODALS ───────────────────
 function openModal(id)  { document.getElementById(id).classList.add('open'); }
-function closeModal(id) { document.getElementById(id).classList.remove('open'); if(id==='modal-detail') closeCurrentTrack(); }
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+  if(id==='modal-detail') {
+    closeCurrentTrack();
+    document.querySelectorAll('#modal-detail iframe').forEach(function(f){ f.src=''; });
+  }
+}
 document.querySelectorAll('.modal-backdrop').forEach(function(bd){
   bd.addEventListener('click', function(e){
     if(e.target!==bd) return;
