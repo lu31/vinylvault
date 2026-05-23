@@ -20,6 +20,16 @@ The AI handled the implementation. I handled the product thinking. That combinat
 
 ## Updates
 
+### v6.0 — May 2026
+
+Every record in your vault now has a Videos tab.
+
+Open any album and you'll see it next to Info and Tracklist. It searches YouTube for official videos related to that album — music videos, live performances, whatever exists — and shows them as a thumbnail grid. Click one and it plays right there inside the overlay. No new tab, no leaving the app.
+
+The one thing it needs is a YouTube Data API v3 key, which you add once in Settings. The key is free, takes about five minutes to set up through Google Cloud Console, and stays in your browser — it never leaves your device. If you haven't set one up yet, the tab tells you exactly how to get one.
+
+Some videos can't be embedded due to restrictions set by the rights holders. For those, a Watch on YouTube link appears below the player so you're never stuck.
+
 ### v5.0 — May 2026
 
 The background image you see when VinylVault loads has always been the same one I chose when I built the thing. That made sense when it was just mine. It makes less sense now that other people are using it.
@@ -56,6 +66,7 @@ Here's what came out of that process. VinylVault is a single-page app that conne
 - **Market value tracking** — pulls current Discogs marketplace data for each record
 - **Cover art** — auto-fetched from Discogs, or upload your own
 - **Custom hero image** — upload a photo from your computer or paste a URL to personalise the background; falls back to the default automatically if the link breaks
+- **YouTube Videos tab** — browse official videos for any album, play them inline; bring your own free YouTube API key
 - **Local storage** — your collection lives in your browser, no account needed
 - **Export & Import** — download your collection as JSON or CSV; import it back on any device
 - **Merge collections** — combine collections from multiple browsers or devices without losing existing records
