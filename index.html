@@ -630,7 +630,7 @@ textarea { resize:vertical; min-height:72px; }
   </div>
   <span class="count-badge" id="count-badge">0 records</span>
   <div class="header-right">
-    <span class="version-tag">v6.2</span>
+    <span class="version-tag">v6.3</span>
     <span class="header-sep">|</span>
     <button class="btn btn-ghost" id="btn-analytics" title="Analytics">
       <svg class="icon-chart" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1945,7 +1945,20 @@ async function loadVideosPanel(r, container, apiKey) {
       card.appendChild(imgWrap); card.appendChild(info);
 
       imgWrap.addEventListener('click', function() {
-        window.open('https://www.youtube.com/watch?v=' + encodeURIComponent(videoId), '_blank');
+        var iframe = document.createElement('iframe');
+        iframe.src = 'https://www.youtube.com/embed/' + encodeURIComponent(videoId);
+        iframe.setAttribute('allow', 'encrypted-media; fullscreen');
+        iframe.allowFullscreen = true;
+        iframe.style.cssText = 'width:100%;aspect-ratio:16/9;border:none;display:block';
+        imgWrap.style.cursor = 'default';
+        while(imgWrap.firstChild) imgWrap.removeChild(imgWrap.firstChild);
+        imgWrap.appendChild(iframe);
+        var ytLink = document.createElement('a');
+        ytLink.href = 'https://www.youtube.com/watch?v=' + encodeURIComponent(videoId);
+        ytLink.target = '_blank';
+        ytLink.style.cssText = 'display:block;padding:5px 10px;font-size:11px;color:var(--text-muted);text-decoration:none;text-align:right';
+        ytLink.textContent = 'Watch on YouTube ↗';
+        card.appendChild(ytLink);
       });
 
       grid.appendChild(card);
