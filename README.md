@@ -4,6 +4,22 @@
   <img src="hero.png" alt="VinylVault" width="100%"/>
 </p>
 
+<p align="center">
+  <a href="https://lu31.github.io/vinylvault/"><b>▶ Open the app</b></a> ·
+  <a href="#updates">What's new</a> ·
+  <a href="#getting-started">How to set up</a> ·
+  <a href="#screenshots">Screenshots</a> ·
+  <a href="LICENSE">License</a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/lu31/vinylvault/stargazers"><img src="https://img.shields.io/github/stars/lu31/vinylvault?style=social" alt="GitHub stars"/></a>
+  <a href="#updates"><img src="https://img.shields.io/badge/version-v6.5-c8a25a" alt="version v6.5"/></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-CC%20BY--NC%204.0-lightgrey" alt="license CC BY-NC 4.0"/></a>
+  <a href="https://github.com/lu31/vinylvault/commits/main"><img src="https://img.shields.io/github/last-commit/lu31/vinylvault" alt="last commit"/></a>
+  <a href="https://lu31.github.io/vinylvault/"><img src="https://img.shields.io/website?url=https%3A%2F%2Flu31.github.io%2Fvinylvault%2F&label=live%20app" alt="live app status"/></a>
+</p>
+
 ## The Story
 
 I have been collecting vinyl records for many years. Like most collectors, my system for tracking everything was somewhere between a memory and a messy CSV file. I knew what I had, mostly, but not always what I paid, whether something was a special edition, or if it was signed. My original Pink Floyd *The Wall*, signed by Roger Waters himself, deserved better than a spreadsheet row.
