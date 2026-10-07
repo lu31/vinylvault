@@ -20,6 +20,18 @@ The AI handled the implementation. I handled the product thinking. That combinat
 
 ## Updates
 
+### v6.5 — October 2026
+
+This one is a security update. Nothing looks different, but VinylVault is safer to use.
+
+I ran a full security review of the app, the kind I now run on everything I build, and it came back mostly clean. Everything that comes in from Discogs, iTunes, YouTube, or a file you import is shown as plain text, never run as code, and no keys have ever been stored in this repo. It did find three things worth fixing, so I fixed them.
+
+The barcode scanner code loads from an outside service. Your browser now checks its fingerprint before running it, so if that file were ever tampered with, it simply would not load, and your Discogs token stays out of reach.
+
+CSV exports are now safe to open in Excel or Google Sheets. Discogs is edited by its community, so a record title could, in theory, be written to act like a spreadsheet formula. Cells like that are now saved as plain text.
+
+Importing is more forgiving and more careful. A damaged backup file used to be able to freeze the app until you cleared your browser. Now any broken entries are skipped, and if a past import already left some behind, the vault cleans them up and opens normally. Import JSON also asks before it replaces your vault, because that should never happen by accident.
+
 ### v6.0 — May 2026
 
 Every record in your vault now has a Videos tab.
